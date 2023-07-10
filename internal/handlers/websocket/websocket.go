@@ -1,7 +1,7 @@
 package websocket
 
 import (
-	websocket2 "GoChitChat/internal/models/websocket"
+	ws "GoChitChat/internal/models/websocket"
 	"GoChitChat/pkg"
 	"log"
 	"net/http"
@@ -17,7 +17,7 @@ var wsUpgrade = websocket.Upgrader{
 	},
 }
 
-func WsHandler(w http.ResponseWriter, r *http.Request, hub *websocket2.Hub) {
+func WsHandler(w http.ResponseWriter, r *http.Request, hub *ws.Hub) {
 	conn, err := wsUpgrade.Upgrade(w, r, nil)
 	if err != nil {
 		http.Error(w, "Failed to upgrade WebSocket", http.StatusInternalServerError)
@@ -25,7 +25,7 @@ func WsHandler(w http.ResponseWriter, r *http.Request, hub *websocket2.Hub) {
 	}
 
 	clientID := pkg.GenerateUniqueId()
-	client := &websocket2.Client{ID: clientID, Hub: hub, Conn: conn, Send: make(chan []byte, 256)}
+	client := &ws.Client{ID: clientID, Hub: hub, Conn: conn, Send: make(chan []byte, 256)}
 
 	err = conn.WriteJSON(map[string]string{"event": "clientId", "clientId": clientID})
 	if err != nil {
