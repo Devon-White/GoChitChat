@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat Rooms</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F2F2F2;
+        }
+
+        .chatroom {
+            width: 300px;
+            padding: 20px;
+            margin: 10px;
+            background-color: #FFF;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+
+        .chatroom:hover {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .chatroom-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<h1>GoChitChat Rooms</h1>
+
+<div id="chatrooms">
+    <div class="chatroom">
+        <div class="chatroom-title">Chat Room 1</div>
+        <button onclick="location.href='chatroom'">Join</button>
+    </div>
+    <!-- More chatrooms can be dynamically added here -->
+</div>
+</body>
+</html>
