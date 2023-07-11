@@ -1,4 +1,6 @@
-package chat
+package models
+
+// Client is a middleman between the .websocket connection and the hub.
 
 type ChatEvent struct {
 	Event    string `json:"event"`

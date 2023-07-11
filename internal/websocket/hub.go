@@ -1,15 +1,22 @@
 package websocket
 
 import (
-	"GoChitChat/internal/models/chat"
+	"GoChitChat/internal/chat/models"
 	"encoding/json"
 	"log"
 )
 
 type Hub struct {
-	Clients    map[*Client]bool
-	Broadcast  chan []byte
-	Register   chan *Client
+	// Registered clients.
+	Clients map[*Client]bool
+
+	// Inbound messages from the clients.
+	Broadcast chan []byte
+
+	// Register requests from the clients.
+	Register chan *Client
+
+	// Unregister requests from clients.
 	Unregister chan *Client
 }
 
@@ -33,7 +40,7 @@ func (hub *Hub) Run() {
 				close(client.Send)
 			}
 		case message := <-hub.Broadcast:
-			var newChatMessage chat.NewChatMessage
+			var newChatMessage models.NewChatMessage
 			err := json.Unmarshal(message, &newChatMessage)
 			if err != nil {
 				log.Println("error unmarshalling message:", err)

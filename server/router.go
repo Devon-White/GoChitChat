@@ -1,10 +1,10 @@
 package server
 
 import (
+	"GoChitChat/internal/chat/handlers"
 	gcc "GoChitChat/internal/handlers"
-	"GoChitChat/internal/handlers/chat"
-	"GoChitChat/internal/handlers/websocket"
-	websocket2 "GoChitChat/internal/models/websocket"
+	"GoChitChat/internal/websocket"
+	handlers2 "GoChitChat/internal/websocket/handlers"
 	"github.com/gin-gonic/gin"
 )
 
@@ -12,7 +12,7 @@ func SetupRoutes() *gin.Engine {
 
 	router := gin.Default()
 
-	hub := websocket2.NewHub()
+	hub := websocket.NewHub()
 	go hub.Run()
 
 	// load HTML templates
@@ -20,9 +20,9 @@ func SetupRoutes() *gin.Engine {
 
 	router.Static("/static", "./static")
 	router.GET("/", gcc.IndexHandler)
-	router.GET("/chatroom", chat.ChatroomHandler)
+	router.GET("/chatroom", handlers.ChatroomHandler)
 	router.GET("/ws", func(context *gin.Context) {
-		websocket.WsHandler(context.Writer, context.Request, hub)
+		handlers2.WsHandler(context.Writer, context.Request, hub)
 
 	})
 

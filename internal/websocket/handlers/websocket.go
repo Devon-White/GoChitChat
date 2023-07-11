@@ -1,7 +1,7 @@
-package websocket
+package handlers
 
 import (
-	ws "GoChitChat/internal/models/websocket"
+	ws "GoChitChat/internal/websocket"
 	"GoChitChat/pkg"
 	"log"
 	"net/http"

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <title>Chat Room</title>
   <style>
@@ -85,9 +85,11 @@
 
     let msg = {
       "event": "new_message",
-      "id": currentTempId,
-      "clientid": clientId,
-      "message": messageInput.value,
+      "data": {
+        "id": currentTempId,
+        "clientid": clientId,
+        "message": messageInput.value,
+      }
     };
 
     await new Promise(resolve => setTimeout(resolve, 500));
